@@ -1,0 +1,65 @@
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  min-height: 100vh;
+  background-color: #2B2D2D;
+}
+.home-footer{
+  width: 100%;
+  position: absolute;
+  bottom: 10px;
+  background: #29292D;
+  color: #fff;
+}
+a {
+  color: #00B7FF;
+}
+.main-section{
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 121px);
+  text-align: center;
+}
+nav{
+  border-bottom: 1px solid #727272;
+}
+.art1{
+  max-height: 330px;
+  position: absolute;
+  top: 50%;
+  right: 0%;
+  transform: translate(32%,-50%);
+}
+.art1 img{
+  max-height: 300px;
+}
+@keyframes rotate {
+  from {
+      transform: rotate(0deg);
+  }
+  to {
+      transform: rotate(360deg);
+  }
+}
+
+/* Apply the animation to the image */
+.art2 {
+  position: absolute;
+  top: 100px;
+  left: -60px;
+  transform: translate(-50%,-50%);
+  animation: rotate 15s linear infinite; /* Adjust the time and animation type as needed */
+}
+.art3 {
+  position: absolute;
+  left: 60px;
+  bottom: 40px;
+  bottom: 40px;
+    max-width: 400px;
+    width: 100%;
+}
+.art3 img{
+  max-width: 100%;
+}
