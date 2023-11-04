@@ -26,6 +26,15 @@ app.use(cookieParser());
 app.use(express.static('public'))
 
 
+// Set Handlebars as the view engine
+app.engine('hbs', exphbs.engine({ extname: '.hbs',defaultLayout: null }));
+app.set('view engine', 'hbs');
+app.set('views', path.join(__dirname, '../views'));
+
+
+
+// Serve static files from the public folder
+app.use(express.static(path.join(__dirname, 'public')));
 
 
 /* ### the api routs ### */
@@ -38,6 +47,7 @@ const authAdminMiddleware = require('../middleware/authAdmin');
 // remote models
 const indexRouter = require('./routes/index');
 const adminRouter = require('./routes/admin');
+const viewsRouter = require("./routes/views")
 const openaiRouter = require('./models/remote/openai');
 const cohereRouter = require('./models/remote/cohere');
 const replicateRouter = require('./models/remote/replicate');
@@ -64,6 +74,8 @@ if (config.SHOW_SWAGGER) {
     }));
 }
 
+app.use('/views', viewsRouter);
+
 // secured apis
 app.use(authMiddleware);
 // models
@@ -80,6 +92,8 @@ app.use('/chatcontext', chatContextRouter);
 
 app.use('/parser', parserRoute)
 app.use('/ocr', ocrRoute)
+
+
 
 
 
