@@ -3,7 +3,6 @@ require('dotenv').config();
 
 // load the dependencies 
 const express = require('express');
-const exphbs = require('express-handlebars');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
@@ -27,15 +26,6 @@ app.use(cookieParser());
 app.use(express.static('public'))
 
 
-// Set Handlebars as the view engine
-app.engine('hbs', exphbs({ extname: 'hbs' }));
-app.set('view engine', 'hbs');
-app.set('views', path.join(__dirname, 'views'));
-
-
-
-// Serve static files from the public folder
-app.use(express.static(path.join(__dirname, 'public')));
 
 
 /* ### the api routs ### */
