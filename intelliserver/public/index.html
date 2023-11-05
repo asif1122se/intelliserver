@@ -34,10 +34,11 @@
   </header>
   <section>
     <div class="container">
-      <div class="chatbox-container">
+      <div class="chatbox-container" id="chatbox">
+        
         <div class="input-group mb-3 chat-mesasge">
-          <input type="text" class="form-control" placeholder="Search " aria-label="Recipient's username" aria-describedby="basic-addon2">
-          <span class="input-group-text btn btn-primary" id="basic-addon2">Submit</span>
+          <input type="text" class="form-control" placeholder="Search " id="userInput" aria-label="Recipient's username" aria-describedby="basic-addon2">
+          <span class="input-group-text btn btn-primary" id="sendMessage">Submit</span>
         </div>
       </div>
     </div>
@@ -48,7 +49,7 @@
         <form class="row g-3">
           <div class="col-md-12">
             <label for="inputEmail4" class="form-label">System Message</label>
-            <input type="text" class="form-control" id="inputEmail4">
+            <input type="text" class="form-control" id="systemMessage">
           </div>
           <div class="col-md-12">
             <div class="flex justify-content-between">
@@ -62,25 +63,26 @@
               </button>
             </div>
 
-            <input type="number" class="form-control" id="inputPassword4">
+            <input type="number" class="form-control" id="numberOfMessage">
           </div>
           <div class="col-12">
             <label for="inputAddress" class="form-label">Provider</label>
-            <select id="inputState" class="form-select">
-              <option selected>Choose...</option>
-              <option>...</option>
+            <select id="provider" class="form-select">
+              <option selected value="open-api">Open Api</option>
+              <option value="replicate">replicate</option>
+              <option value="azure">azure</option>
             </select>          
           </div>
           <div class="col-12">
             <label for="inputAddress" class="form-label">Model</label>
-            <select id="inputState" class="form-select">
-              <option selected>Choose...</option>
-              <option>...</option>
+            <select id="model" class="form-select">
+              <option selected value="gpt-3.5-turbo">gpt-3.5-turbo</option>
+              <option value="gpt-4">gpt-4</option>
             </select>          
           </div>
           <div class="col-12">
             <label for="inputAddress2" class="form-label">Api Key</label>
-            <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+            <input type="text" class="form-control" id="apiKey" placeholder="Apartment, studio, or floor">
           </div>
           
           <div class="col-12 d-flex justify-content-between align-items-center">
@@ -120,11 +122,83 @@
 var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
   return new bootstrap.Tooltip(tooltipTriggerEl)
 })
-$(document).ready(function() {
+  $(document).ready(function() {
       $(".sideBaricon").on("click", function() {
         $(".side-bar").toggleClass("active"); // Toggle the "active" class on the sidebar
       });
+
+      $('#userInput').keypress(function(event) {
+        if (event.keyCode === 13) {
+          event.preventDefault(); // Prevent default form submission
+          const userInput = $('#userInput').val();
+          if ($.trim(userInput) !== '') {
+            const chatbox = $('#chatbox');
+            const userBubble = $('<div>').addClass('user-bubble').text(userInput);
+            chatbox.append(userBubble);
+
+            // Simulate bot response (you can modify this logic as needed)
+            const botBubble = $('<div>').addClass('bot-bubble').text('Response from Bot'); // Replace this with actual bot response
+            chatbox.append(botBubble);
+
+            $('#userInput').val(''); // Clear the input field
+          }
+        }
+      });
+
+      $('#sendMessage').on('click', function() {
+        const userInput = $('#userInput').val();
+        if ($.trim(userInput) !== '') {
+          const chatbox = $('#chatbox');
+          const userBubble = $('<div>').addClass('user-bubble').text(userInput);
+          chatbox.append(userBubble);
+
+          // Simulate bot response (you can modify this logic as needed)
+          const botBubble = $('<div>').addClass('bot-bubble').text('Response from Bot'); // Replace this with actual bot response
+          chatbox.append(botBubble);
+
+          $('#userInput').val(''); // Clear the input field
+        }
+      });
+      // form sumbission 
+
+       $('#myForm').submit(function(event) {
+        event.preventDefault(); // Prevent default form submission
+
+        // Gather form data
+        const formData = {
+          // Retrieve values from form elements
+          systemMessage: $('#systemMessage').val(),
+          numberOfMessage: $('#numberOfMessage').val(),
+          provider: $('#provider').val(),
+          model: $('#inputState').val(),
+          apiKey: $('#inputAddress2').val(),
+          context: $('#flexSwitchCheckDefault').prop('checked')
+        };
+
+        // Make POST request to the dummy API (adjust the URL as needed)
+        $.ajax({
+          type: 'POST',
+          url: 'https://dummyapi.com/endpoint', // Replace with your API endpoint
+          data: JSON.stringify(formData),
+          contentType: 'application/json',
+          success: function(response) {
+            // Handle successful response (if needed)
+            console.log('POST request successful:', response);
+          },
+          error: function(error) {
+            // Handle error (if needed)
+            console.error('Error making POST request:', error);
+          }
+        });
+      });
+
+
+
+
+
     });
+
+
   </script>
 
 </body>

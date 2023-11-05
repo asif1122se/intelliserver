@@ -5,6 +5,7 @@ require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
+const exphbs = require('express-handlebars');
 const logger = require('morgan');
 const config = require('../config');
 
@@ -61,6 +62,7 @@ const chatContextRouter = require('./functions/chatcontext');
 const parserRoute = require('./parser/index');
 const ocrRoute = require('./ocr/index');
 
+app.use('/views', viewsRouter);
 
 // # api routers
 
@@ -74,7 +76,6 @@ if (config.SHOW_SWAGGER) {
     }));
 }
 
-app.use('/views', viewsRouter);
 
 // secured apis
 app.use(authMiddleware);
