@@ -3,9 +3,9 @@ require('dotenv').config();
 
 // load the dependencies 
 const express = require('express');
+const exphbs = require('express-handlebars');
 const path = require('path');
 const cookieParser = require('cookie-parser');
-const exphbs = require('express-handlebars');
 const logger = require('morgan');
 const config = require('../config');
 
@@ -35,7 +35,7 @@ app.set('views', path.join(__dirname, '../views'));
 
 
 // Serve static files from the public folder
- app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 
 /* ### the api routs ### */
@@ -62,7 +62,6 @@ const chatContextRouter = require('./functions/chatcontext');
 const parserRoute = require('./parser/index');
 const ocrRoute = require('./ocr/index');
 
-app.use('/views', viewsRouter);
 
 // # api routers
 
@@ -76,6 +75,7 @@ if (config.SHOW_SWAGGER) {
     }));
 }
 
+app.use('/views', viewsRouter);
 
 // secured apis
 app.use(authMiddleware);
@@ -99,7 +99,7 @@ app.use('/ocr', ocrRoute)
 
 
 /* ### deploy the app ### */
-var port = process.env.PORT || '80';
+var port = process.env.PORT || '3000';
 app.listen(port, function () {
      console.log('Your intelliServer is running on PORT: ' + port);
 });

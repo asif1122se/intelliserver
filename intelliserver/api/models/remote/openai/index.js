@@ -9,6 +9,7 @@ const { USE_DEFAULT_KEYS } = require(path.join(global.__basedir, 'config'));
 
 /* GET api. */
 router.get('/', function(req, res, next) {
+    console.log("halsfjlksa")
   res.json({ status: "OK", message: "OpenAI Micro Service is active!" });
 });
 
