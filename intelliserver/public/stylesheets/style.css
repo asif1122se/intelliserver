@@ -3,6 +3,9 @@ body {
   min-height: 100vh;
   background-color: #2B2D2D;
 }
+.cursor-pointer{
+  cursor: pointer;
+}
 .home-footer{
   width: 100%;
   position: absolute;
@@ -72,12 +75,25 @@ nav{
   display: flex;
   flex-direction: column;
   border-radius: 5px;
-  padding: 10px;
   overflow-y: auto;
+  padding-block: 1.5rem;
 }
 .chat-mesasge{
   position: absolute;
   bottom: 10px;
+}
+.chatbox-container .form-control{
+  background-color: #0000;
+  color: #fff;
+
+}
+.chatbox-container .form-control:focus,
+.chatbox-container .form-control:hover
+{
+  background-color: #0000;
+  color:#fff;
+  outline: none;
+  box-shadow: none;
 }
 .side-bar{
   width: 320px;
@@ -147,4 +163,7 @@ nav{
   max-width: 70%;
   float: left;
   clear: both;
+}
+.submit-button{
+  min-width: 120px;
 }
