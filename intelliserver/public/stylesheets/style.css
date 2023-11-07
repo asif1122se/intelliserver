@@ -3,6 +3,9 @@ body {
   min-height: 100vh;
   background-color: #2B2D2D;
 }
+*{
+  font-family: 'Inter', sans-serif;
+}
 .cursor-pointer{
   cursor: pointer;
 }
@@ -12,6 +15,19 @@ body {
   bottom: 10px;
   background: #29292D;
   color: #fff;
+}
+.primary-bg{
+  background-color: #ADAFEE;
+  outline: none;
+  border: 1px solid #ADAFEE;
+}
+.primary-bg:hover,
+.primary-bg:focus,
+.primary-bg:active
+{
+  background-color: #ADAFEE;
+  border: 1px solid #ADAFEE;
+
 }
 a {
   color: #00B7FF;
@@ -85,7 +101,25 @@ nav{
 .chatbox-container .form-control{
   background-color: #0000;
   color: #fff;
-
+}
+.page-heading{
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+.list{
+  padding: 0;
+  margin: 0;
+}
+.list li{
+  list-style: none;
+  font-size: 2rem;
+  color: #fff;
+  margin-bottom: 1rem;
+}
+.list li a{
+  text-decoration: none;
+  color: inherit ;
 }
 .chatbox-container .form-control:focus,
 .chatbox-container .form-control:hover
